@@ -1,0 +1,35 @@
+<script type="module">
+  import { auth } from "./js/firebase.js";
+  import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+  onAuthStateChanged(auth, (user) => {
+    if (!user) {
+      window.location.href = "login.html";
+    }
+  });
+</script>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Product Details - ECOlink</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div class="navbar">
+  <a href="index.html">Marketplace</a>
+  <a href="sell.html">Sell Product</a>
+  <a href="login.html">Login</a>
+  <button onclick="logout()">Logout</button>
+</div>
+<hr>
+  <h1>Product Details</h1>
+
+  <div id="product"></div>
+
+  <br>
+  <button onclick="buyNow()">Buy Now</button>
+
+  <script type="module" src="js/product.js"></script>
+
+</body>
+</html>

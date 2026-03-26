@@ -1,3 +1,6 @@
+import { db } from "./firebase.js";
+import { doc, setDoc } 
+from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 import { auth } from "./firebase.js";
 
 import {
@@ -28,9 +31,29 @@ window.signup = async () => {
   const password = document.getElementById("password").value;
 
   try {
-    await createUserWithEmailAndPassword(auth, email, password);
-    document.getElementById("message").innerText = "Account created!";
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user;
+
+    // Save user in Firestore
+    await setDoc(doc(db, "users", user.uid), {
+      email: user.email,
+      createdAt: new Date()
+    });
+
+    document.getElementById("message").innerText = "Account created! Redirecting...";
+
+setTimeout(() => {
+  window.location.href = "index.html";
+}, 1500);
   } catch (error) {
     document.getElementById("message").innerText = error.message;
   }
+};
+
+import { signOut } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+// Logout
+window.logout = async () => {
+  await signOut(auth);
+  window.location.href = "login.html";
 };
