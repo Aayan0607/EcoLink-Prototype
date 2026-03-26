@@ -1,0 +1,12 @@
+# Node modules (future proofing)
+node_modules/
+
+# Environment variables (if used later)
+.env
+
+# Mac/Windows junk
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
