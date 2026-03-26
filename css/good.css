@@ -1,0 +1,90 @@
+/* General Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: #f0f4f1; /* Light mint grey */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: #2d3436;
+}
+
+/* Card Container */
+.login-container {
+  background: #ffffff;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  width: 100%;
+  max-width: 350px;
+  text-align: center;
+}
+
+h2 {
+  margin-bottom: 25px;
+  color: #27ae60; /* Eco Green */
+  font-weight: 600;
+}
+
+/* Input Styling */
+input {
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 15px;
+  border: 1px solid #dcdde1;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border-color 0.3s ease;
+}
+
+input:focus {
+  outline: none;
+  border-color: #27ae60;
+}
+
+/* Button Grouping */
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.btn-login {
+  background-color: #27ae60;
+  color: white;
+}
+
+.btn-signup {
+  background-color: transparent;
+  color: #27ae60;
+  border: 1px solid #27ae60;
+}
+
+button:hover {
+  opacity: 0.85;
+}
+
+/* Message Text */
+#message {
+  margin-top: 20px;
+  font-size: 13px;
+  color: #e74c3c; /* Red for errors */
+}

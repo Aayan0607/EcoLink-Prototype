@@ -31,10 +31,26 @@ async function loadProduct() {
   const data = docSnap.data();
 
   container.innerHTML = `
-    <h2>${data.title}</h2>
-    <img src="${data.imageUrl}" width="200"><br>
-    <p>Price: ₹${data.price}</p>
-    <p>Quantity: ${data.quantity} ${data.unit}</p>
+    <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 2rem;">
+        <img src="${data.imageUrl || 'https://via.placeholder.com/150'}" style="width: 80px; height: 80px; object-fit: cover; border-radius: var(--radius-sm);" alt="Product">
+        <div>
+           <h3 style="font-size: 1.1rem; margin-bottom: 0.25rem;">${data.title}</h3>
+           <div style="color: var(--color-text-muted); font-size: 0.875rem;">Qty: ${data.quantity} ${data.unit}</div>
+        </div>
+    </div>
+    
+    <div class="summary-item">
+       <span>Subtotal</span>
+       <span>₹${data.price}</span>
+    </div>
+    <div class="summary-item">
+       <span>Platform Fee</span>
+       <span>₹0</span>
+    </div>
+    <div class="summary-total">
+       <span>Total amount</span>
+       <span style="color: var(--color-primary);">₹${data.price}</span>
+    </div>
   `;
 }
 

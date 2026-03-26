@@ -1,20 +1,71 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ECOlink Login</title>
-  <link rel="stylesheet" href="css/styles.css">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+      /* Unique style just for login page layout */
+      body {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          min-height: 100vh;
+      }
+      .brand-large {
+          font-family: var(--font-heading);
+          font-size: 2.5rem;
+          font-weight: 700;
+          color: var(--color-primary);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 0.5rem;
+          margin-bottom: 2rem;
+      }
+  </style>
 </head>
 <body>
 
-  <h2>Company Login</h2>
+  <div class="container-sm">
+      <div class="brand-large">
+          <i class="ph-fill ph-leaf"></i> ECOlink
+      </div>
+      
+      <div class="card-form">
+          <div class="form-header">
+              <h1>Welcome Back</h1>
+              <p>Sign in to your corporate account</p>
+          </div>
 
-  <input type="email" id="email" placeholder="Email"><br><br>
-  <input type="password" id="password" placeholder="Password"><br><br>
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" class="form-control" placeholder="company@domain.com">
+          </div>
 
-  <button onclick="login()">Login</button>
-  <button onclick="signup()">Sign Up</button>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" class="form-control" placeholder="••••••••">
+          </div>
 
-  <p id="message"></p>
+          <div class="grid-cols-2" style="gap: 1rem; margin-top: 2rem;">
+            <button onclick="login()" class="btn btn-primary btn-block"><i class="ph ph-sign-in"></i> Login</button>
+            <button onclick="signup()" class="btn btn-secondary btn-block"><i class="ph ph-user-plus"></i> Sign Up</button>
+          </div>
+
+          <div id="message"></div>
+      </div>
+  </div>
 
   <script type="module" src="js/auth.js"></script>
 

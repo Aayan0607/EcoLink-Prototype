@@ -18,13 +18,21 @@ async function loadProducts() {
 
     container.innerHTML += `
   <div class="card" onclick="goToProduct('${id}')">
-    <img src="${data.imageUrl}" width="200"><br>
-    <h3>${data.title}</h3>
-    <p>Category: ${data.category}</p>
-    <p>Price: ₹${data.price}</p>
-    <p>Location: ${data.location}</p>
+    <div class="card-img-wrapper">
+      <img src="${data.imageUrl || 'https://via.placeholder.com/400x300?text=No+Image'}" alt="${data.title}">
+    </div>
+    <div class="card-body">
+      <span class="card-category">${data.category || 'Uncategorized'}</span>
+      <h3 class="card-title">${data.title}</h3>
+      <div class="card-location">
+         <i class="ph ph-map-pin"></i> ${data.location || 'Unknown'}
+      </div>
+      <div class="card-footer">
+        <span class="card-price">₹${data.price}</span>
+        <span class="card-quantity">per ${data.unit || 'unit'}</span>
+      </div>
+    </div>
   </div>
-  <hr>
 `;
   });
 }

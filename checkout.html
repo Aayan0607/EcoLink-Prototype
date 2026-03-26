@@ -1,41 +1,103 @@
-<script type="module">
-  import { auth } from "./js/firebase.js";
-  import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-
-  onAuthStateChanged(auth, (user) => {
-    if (!user) {
-      window.location.href = "login.html";
-    }
-  });
-</script>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Checkout - ECOlink</title>
-  <link rel="stylesheet" href="css/styles.css">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  
+  <!-- Firebase Auth Guard -->
+  <script type="module">
+    import { auth } from "./js/firebase.js";
+    import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+    onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        window.location.href = "login.html";
+      }
+    });
+
+    window.logout = () => {
+        auth.signOut().then(() => {
+            window.location.href = "login.html";
+        });
+    };
+  </script>
+
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<div class="navbar">
-  <a href="index.html">Marketplace</a>
-  <a href="sell.html">Sell Product</a>
-  <a href="login.html">Login</a>
-  <button onclick="logout()">Logout</button>
-</div>
-<hr>
-  <h1>Checkout</h1>
 
-  <div id="productSummary"></div>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="brand">
+      <i class="ph-fill ph-leaf"></i> ECOlink
+    </div>
+    <div class="nav-links">
+      <a href="index.html"><i class="ph ph-storefront"></i> Marketplace</a>
+      <a href="sell.html"><i class="ph ph-plus-circle"></i> Sell Product</a>
+      <button class="btn btn-secondary btn-sm" onclick="logout()"><i class="ph ph-sign-out"></i> Logout</button>
+    </div>
+  </nav>
 
-  <h3>Payment Details</h3>
+  <!-- Main Content -->
+  <main>
+    <a href="index.html" class="btn btn-secondary btn-sm" style="margin-bottom: 2rem;"><i class="ph ph-arrow-left"></i> Back to Shop</a>
+    
+    <div class="page-header">
+       <div>
+         <h1>Secure Checkout</h1>
+         <p style="color: var(--color-text-muted);">Review your order and complete payment.</p>
+       </div>
+    </div>
 
-  <input type="text" placeholder="Card Number"><br><br>
-  <input type="text" placeholder="Card Holder Name"><br><br>
-  <input type="text" placeholder="Expiry Date"><br><br>
-  <input type="text" placeholder="CVV"><br><br>
+    <div class="checkout-wrapper">
+       <!-- Left Side: Payment Form -->
+       <div class="card-form">
+          <div class="form-header" style="text-align: left; margin-bottom: 1.5rem;">
+             <h2 style="font-size: 1.5rem; display: flex; align-items: center; gap: 0.5rem;"><i class="ph ph-credit-card"></i> Payment Details</h2>
+          </div>
+          
+          <div class="form-group">
+            <label>Name on Card</label>
+            <input type="text" class="form-control" placeholder="John Doe">
+          </div>
+          
+          <div class="form-group">
+            <label>Card Number</label>
+            <input type="text" class="form-control" placeholder="0000 0000 0000 0000">
+          </div>
+          
+          <div class="grid-cols-2" style="gap: 1rem;">
+             <div class="form-group">
+               <label>Expiry Date</label>
+               <input type="text" class="form-control" placeholder="MM/YY">
+             </div>
+             <div class="form-group">
+               <label>CVV</label>
+               <input type="text" class="form-control" placeholder="123">
+             </div>
+          </div>
+          
+          <button onclick="placeOrder()" class="btn btn-primary btn-block"><i class="ph-bold ph-lock-key"></i> Confirm & Pay</button>
+          
+          <div id="message"></div>
+       </div>
 
-  <button onclick="placeOrder()">Confirm Order</button>
-
-  <p id="message"></p>
+       <!-- Right Side: Order Summary -->
+       <div class="order-summary">
+          <h2 style="font-size: 1.25rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;"><i class="ph ph-receipt"></i> Order Summary</h2>
+          <div id="productSummary"></div>
+       </div>
+    </div>
+  </main>
 
   <script type="module" src="js/checkout.js"></script>
 

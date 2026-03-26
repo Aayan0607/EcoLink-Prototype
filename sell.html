@@ -1,58 +1,120 @@
-<script type="module">
-  import { auth } from "./js/firebase.js";
-  import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-
-  onAuthStateChanged(auth, (user) => {
-    if (!user) {
-      window.location.href = "login.html";
-    }
-  });
-</script>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sell Byproduct - ECOlink</title>
-  <link rel="stylesheet" href="css/styles.css">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  
+  <!-- Firebase Auth Guard -->
+  <script type="module">
+    import { auth } from "./js/firebase.js";
+    import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+    onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        window.location.href = "login.html";
+      }
+    });
+
+    window.logout = () => {
+        auth.signOut().then(() => {
+            window.location.href = "login.html";
+        });
+    };
+  </script>
+
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<div class="navbar">
-  <a href="index.html">Marketplace</a>
-  <a href="sell.html">Sell Product</a>
-  <a href="login.html">Login</a>
-  <button onclick="logout()">Logout</button>
-</div>
-<hr>
-  <h2>List a Byproduct</h2>
 
-  <input type="text" id="title" placeholder="Product Title"><br><br>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="brand">
+      <i class="ph-fill ph-leaf"></i> ECOlink
+    </div>
+    <div class="nav-links">
+      <a href="index.html"><i class="ph ph-storefront"></i> Marketplace</a>
+      <a href="sell.html" class="active"><i class="ph ph-plus-circle"></i> Sell Product</a>
+      <button class="btn btn-secondary btn-sm" onclick="logout()"><i class="ph ph-sign-out"></i> Logout</button>
+    </div>
+  </nav>
 
-  <select id="category">
-    <option value="">Select Category</option>
-    <option value="Metal">Metal</option>
-    <option value="Plastic">Plastic</option>
-    <option value="Chemical">Chemical</option>
-    <option value="Organic">Organic</option>
-  </select><br><br>
+  <!-- Main Content -->
+  <main class="flex-center">
+    <div class="container-sm">
+        <div class="card-form">
+          <div class="form-header">
+             <i class="ph-duotone ph-package" style="font-size: 3.5rem; color: var(--color-primary); margin-bottom: 0.5rem;"></i>
+             <h1>List an Item</h1>
+             <p>Turn your industrial waste into valuable resources.</p>
+          </div>
+          
+          <div class="form-group">
+            <label for="title">Product Title</label>
+            <input type="text" id="title" class="form-control" placeholder="e.g., Scrap Metal Shavings">
+          </div>
 
-  <textarea id="description" placeholder="Description"></textarea><br><br>
+          <div class="form-group">
+            <label for="category">Category</label>
+            <select id="category" class="form-control">
+              <option value="">Select Category</option>
+              <option value="Metal">Metal</option>
+              <option value="Plastic">Plastic</option>
+              <option value="Chemical">Chemical</option>
+              <option value="Organic">Organic</option>
+            </select>
+          </div>
 
-  <input type="number" id="quantity" placeholder="Quantity"><br><br>
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea id="description" class="form-control" placeholder="Provide details about the byproduct's condition and origin..."></textarea>
+          </div>
 
-  <select id="unit">
-    <option value="kg">kg</option>
-    <option value="tons">tons</option>
-    <option value="liters">liters</option>
-  </select><br><br>
+          <div class="grid-cols-2" style="gap: 1rem;">
+              <div class="form-group">
+                <label for="quantity">Quantity</label>
+                <input type="number" id="quantity" class="form-control" placeholder="Amount">
+              </div>
 
-  <input type="number" id="price" placeholder="Price"><br><br>
+              <div class="form-group">
+                <label for="unit">Unit</label>
+                <select id="unit" class="form-control">
+                  <option value="kg">kg</option>
+                  <option value="tons">tons</option>
+                  <option value="liters">liters</option>
+                </select>
+              </div>
+          </div>
 
-  <input type="text" id="location" placeholder="Location"><br><br>
+          <div class="form-group">
+            <label for="price">Price (₹)</label>
+            <input type="number" id="price" class="form-control" placeholder="Total expected price">
+          </div>
 
-  <input type="text" id="imageUrl" placeholder="Image URL (paste from postimages)"><br><br>
+          <div class="form-group">
+            <label for="location">Location</label>
+            <input type="text" id="location" class="form-control" placeholder="City or Region">
+          </div>
 
-  <button onclick="uploadProduct()">List Product</button>
+          <div class="form-group">
+            <label for="imageUrl">Image URL</label>
+            <input type="url" id="imageUrl" class="form-control" placeholder="Paste image link here">
+          </div>
 
-  <p id="message"></p>
+          <button onclick="uploadProduct()" class="btn btn-primary btn-block"><i class="ph ph-upload-simple"></i> Upload</button>
+          
+          <div id="message"></div>
+        </div>
+    </div>
+  </main>
 
   <script type="module" src="js/sell.js"></script>
 
