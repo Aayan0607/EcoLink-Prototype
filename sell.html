@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sell Byproduct - ECOlink</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <h2>List a Byproduct</h2>
+
+  <input type="text" id="title" placeholder="Product Title"><br><br>
+
+  <select id="category">
+    <option value="">Select Category</option>
+    <option value="Metal">Metal</option>
+    <option value="Plastic">Plastic</option>
+    <option value="Chemical">Chemical</option>
+    <option value="Organic">Organic</option>
+  </select><br><br>
+
+  <textarea id="description" placeholder="Description"></textarea><br><br>
+
+  <input type="number" id="quantity" placeholder="Quantity"><br><br>
+
+  <select id="unit">
+    <option value="kg">kg</option>
+    <option value="tons">tons</option>
+    <option value="liters">liters</option>
+  </select><br><br>
+
+  <input type="number" id="price" placeholder="Price"><br><br>
+
+  <input type="text" id="location" placeholder="Location"><br><br>
+
+  <input type="text" id="imageUrl" placeholder="Image URL (paste from postimages)"><br><br>
+
+  <button onclick="uploadProduct()">List Product</button>
+
+  <p id="message"></p>
+
+  <script type="module" src="js/sell.js"></script>
+
+</body>
+</html>
